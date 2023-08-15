@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { createShow } from "../../api/fetch";
 import "./ShowsForm.css";
 
 export default function ShowsForm() {
@@ -15,7 +15,23 @@ export default function ShowsForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  function handleSubmit(event) {
+    event.preventDefault();
+    /*
+    const tempShow = {
+      type: event.target.type.value,
+      title: event.target.title.value,
+      country: event.target.country.value,
+      dateAdded: event.target.dateAdded.value,
+      description: event.target.description.value,
+      duration: event.target.duration.value,
+      listedIn: event.target.listedIn.value,
+      rating: event.target.rating.value,
+      releaseYear: event.target.releaseYear.value,
+    };*/
+    //console.log(show);
+    createShow(show);
+  }
 
   function handleTextChange(event) {
     setShow({

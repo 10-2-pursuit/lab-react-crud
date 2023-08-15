@@ -3,12 +3,19 @@ const URL = import.meta.env.VITE_BASE_API_URL;
 
 // Create
 export function createShow(show) {
-  return;
+  return fetch(`${URL}/shows/`, { 
+                                        method: "POST", 
+                                        headers: {
+                                                    'Accept': 'application/json', 
+                                                    'Content-Type': 'application/json'
+                                                  }, 
+                                        body: JSON.stringify(show),
+                                      });
 }
 
 // Delete
 export function destroyShow(id) {
-  return;
+  return; 
 }
 
 // Index/Get all
@@ -33,4 +40,15 @@ export function getAllMovies() {
 
 export function getOneMovie(id) {
   return fetch(`${URL}/movies/${id}`).then(res => res.json());
+}
+
+export function createMovie(movie) {
+  return fetch(`${URL}/movies/`, { 
+                                        method: "POST", 
+                                        headers: {
+                                                    'Accept': 'application/json', 
+                                                    'Content-Type': 'application/json'
+                                                  }, 
+                                        body: JSON.stringify(movie),
+                                      });
 }
