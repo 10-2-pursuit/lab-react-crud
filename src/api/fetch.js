@@ -15,7 +15,13 @@ export function createShow(show) {
 
 // Delete
 export function destroyShow(id) {
-  return; 
+  return fetch(`${URL}/shows/${id}`, { 
+                                  method: "DELETE", 
+                                  headers: {
+                                              'Accept': 'application/json', 
+                                              'Content-Type': 'application/json'
+                                            },
+  });
 }
 
 // Index/Get all
@@ -30,7 +36,14 @@ export function getOneShow(id) {
 
 // Update
 export function updateShow(id, show) {
-  return;
+  return fetch(`${URL}/shows/${id}`, { 
+                                  method: "PUT", 
+                                  headers: {
+                                              'Accept': 'application/json', 
+                                              'Content-Type': 'application/json'
+                                            }, 
+                                  body: JSON.stringify(show),
+  });
 }
 
 // Movies
@@ -51,4 +64,15 @@ export function createMovie(movie) {
                                                   }, 
                                         body: JSON.stringify(movie),
                                       });
+}
+
+export function updateMovie(id, movie) {
+  return fetch(`${URL}/movies/${id}`, { 
+                                  method: "PUT", 
+                                  headers: {
+                                              'Accept': 'application/json', 
+                                              'Content-Type': 'application/json'
+                                            }, 
+                                  body: JSON.stringify(movie),
+  });
 }

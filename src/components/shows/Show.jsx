@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import "./Show.css";
 
 import ErrorMessage from "../errors/ErrorMessage";
-import { getOneShow } from "../../api/fetch";
+import { destroyShow, getOneShow } from "../../api/fetch";
 
 function Show() {
   const [show, setShow] = useState({});
@@ -28,7 +28,11 @@ function Show() {
         setLoadingError(true)
       })
   },[id])
-  function handleDelete() {}
+  
+  function handleDelete() {
+    destroyShow(id);
+    //need some redirection.
+  }
 
   return (
     <section className="shows-show-wrapper">

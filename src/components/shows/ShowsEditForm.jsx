@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./ShowsForm.css";
+import { useParams } from "react-router-dom";
+import { updateShow } from "../../api/fetch";
 
 export default function ShowsForm() {
   const [show, setShow] = useState({
@@ -13,8 +15,13 @@ export default function ShowsForm() {
     rating: "",
     releaseYear: "",
   });
+  const params = useParams();
+  const { id } = params;
 
-  function handleSubmit(event) {}
+  function handleSubmit(event) {
+    event.preventDefault();
+    updateShow(id, show);
+  }
 
   function handleTextChange(event) {
     setShow({
