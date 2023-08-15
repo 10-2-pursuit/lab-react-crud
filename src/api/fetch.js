@@ -1,4 +1,5 @@
 // Shows
+const URL = import.meta.env.VITE_BASE_API_URL;
 
 // Create
 export function createShow(show) {
@@ -12,7 +13,10 @@ export function destroyShow(id) {
 
 // Index/Get all
 export function getAllShows() {
+
   return;
+  
+  
 }
 
 // Show/Get one
@@ -27,6 +31,11 @@ export function updateShow(id, show) {
 
 // Movies
 
-export function getAllMovies() {
-  return;
+export function getallMovies() {
+  return fetch(`${URL}/movies`).then(res => res.json());
+}
+
+export function getMovies() {
+  return fetch(`${URL}/movies/${id}`).then(res => res.json());
+
 }
