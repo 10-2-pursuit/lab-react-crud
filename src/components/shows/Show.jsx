@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 
 import "./Show.css";
 
@@ -11,6 +11,7 @@ function Show() {
   const [loadingError, setLoadingError] = useState(false);
 
   const { id } = useParams();
+  const navi = useNavigate();
 
   useEffect(() => {
     getOneShow(id)
@@ -27,11 +28,16 @@ function Show() {
         console.error(err)
         setLoadingError(true)
       })
-  },[id])
-  
+  },[id]);
+
+  useEffect(() => {
+
+  },[navi]);
+
   function handleDelete() {
     destroyShow(id);
     //need some redirection.
+    navi('/shows');
   }
 
   return (
