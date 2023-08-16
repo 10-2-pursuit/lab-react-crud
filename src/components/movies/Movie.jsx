@@ -7,7 +7,7 @@ import React from "react";
 
 const Movie = () => {
   const [movie, setMovie] = useState({});
-  const [loadingError, setLoadingError] = useState(false);
+  const [error, setError] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,22 +16,25 @@ const Movie = () => {
     getOneMovie(id)
       .then((movieData) => {
         setMovie(movieData);
-        if (Object.keys(showData).length === 0) {
-          setLoadingError(true);
-        } else {
-          setLoadingError(false);
-        }
+        Object.keys(showData).length ? setError(true) : setError(false);
       })
       .catch((err) => {
         console.error(err);
-        setLoadingError(true);
+        setError(true);
       });
-  });
+  }, []);
+
+  function handleDelete(id) {
+    destroyMovie(id).then(() => {
+      alert("Movie has been removed, rerouting to the list of movies.");
+      navigate("/movies");
+    });
+  }
   return (
-    <section className="shows-movie-wrapper">
+    <section className="movies-movie-wrapper">
       <h2>{movie.title}</h2>
-      <section className="shows-movie">
-        {loadingError ? (
+      <section className="movies-movie">
+        {error ? (
           <ErrorMessage />
         ) : (
           <>
