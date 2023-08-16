@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import "./Show.css";
@@ -10,8 +10,21 @@ function Show() {
   const [loadingError, setLoadingError] = useState(false);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  function handleDelete() {}
+
+  useEffect(() => {
+  getOneShow(id)
+  .then (showData => setShow(showData)) 
+    if (showData.status === 404) {
+      setLoadingError(true);
+  
+    }
+}
+
+  function handleDelete(id) {
+    id = show.id
+  }
 
   return (
     <section className="shows-show-wrapper">

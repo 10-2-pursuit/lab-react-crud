@@ -2,32 +2,50 @@
 const URL = import.meta.env.VITE_BASE_API_URL;
 
 // Create
-export function createShow(show) {
+export function createShow(id, show) {
+  const options ={ 
+    method: "PUT", 
+    body: JSON.stringify{shows}
+    headers: {"Content-Type", "application/json"}
+    ;
+
+  }
   return;
-}
+
 
 // Delete
 export function destroyShow(id) {
-  return;
+  const options = {method: "DELETE"}
+  return fetch(`${URL}/shows/${id}`, options)
 }
 
 // Index/Get all
 export function getAllShows() {
 
-  return;
-  
+  return fetch(`${URL}/shows`)
+  .then ((response) => response.json)
+    
   
 }
 
 // Show/Get one
 export function getOneShow(id) {
-  return;
+  return fetch(`${URL}/show/${id}`)
 }
 
 // Update
 export function updateShow(id, show) {
-  return;
-}
+
+    const options ={ 
+      method: "PUT", 
+      body: JSON.stringify{shows}
+      headers: {"Content-Type", "application/json"}
+      
+  
+    }
+    return;
+  }
+  
 
 // Movies
 
