@@ -20,7 +20,7 @@ export default function ShowsForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    updateShow(id, show);
+    updateShow(id, show).then(()=>{console.log("fetch successfully")}).catch((err) => console.error(err));
   }
 
   function handleTextChange(event) {

@@ -30,14 +30,15 @@ function Show() {
       })
   },[id]);
 
-  useEffect(() => {
+  useEffect(null,[navi]);
 
-  },[navi]);
-
-  function handleDelete() {
-    destroyShow(id);
-    //need some redirection.
-    navi('/shows');
+  function handleDelete(id) {
+    destroyShow(id).then((msg) => {
+                                    console.log("delete successfully");
+                                  }).catch((err) => {
+                                                      console.error(err);
+                                                      setLoadingError(true);
+                                                    });
   }
 
   return (
