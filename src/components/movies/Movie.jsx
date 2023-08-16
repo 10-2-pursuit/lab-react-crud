@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { getOneMovie, destroyMovie } from "../../api/fetch";
-
+import "./Movie.css"
 import React from "react";
 
 const Movie = () => {

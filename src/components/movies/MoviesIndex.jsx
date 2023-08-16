@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
 import MovieListing from './MovieListing';
 import { getAllMovies } from '../../api/fetch';
+import "./MoviesIndex.css"
 
 const MoviesIndex = () => {
   const [error, setError] = useState(false);
