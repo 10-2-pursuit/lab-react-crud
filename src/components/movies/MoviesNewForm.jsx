@@ -15,7 +15,16 @@ export default function MoviesForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  const nav = useNavigate();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  
+    createMovie(movie).then(() => {
+      console.log("create success");
+      nav('/movies');
+    }).catch((err)=>console.error(err));
+  }
 
   function handleTextChange(event) {
     setMovie({

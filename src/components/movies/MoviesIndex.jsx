@@ -8,7 +8,8 @@ import "./MoviesIndex.css";
 export default function MoviesIndex() {
   const [loadingError, setLoadingError] = useState(false)
   const [movies, setMovies] = useState([]);
-
+  const [title, setTitle] = useState("");
+  
   useEffect(() => {
     // we need to get data 
     getAllMovies()
@@ -23,6 +24,34 @@ export default function MoviesIndex() {
     // and save it to our shows  state
 
   },[])
+
+  useEffect(()=> {
+    if(title){
+      getAllMovies().then((moviesJson) => {
+        setShows(moviesJson.filter((movie) => movie.title.includes(title)));
+        setLoadingError(false);
+      }).catch((err)=>{
+        setLoadingError(true);
+        console.error(err);
+      });
+    }
+    else{
+      getAllMovies()
+      .then((moviesJson) => {
+        setShows(moviesJson)
+        setLoadingError(false)
+      })
+      .catch((err)=> {
+        setLoadingError(true);
+        console.error(err)
+      })
+    }
+  },[title]);
+
+  function handleTextChange(){
+    const inputField = document.getElementById('searchTitle').value;
+    setTitle(inputField);
+  }
 
   return (
     <div>
@@ -41,7 +70,7 @@ export default function MoviesIndex() {
               type="text"
               // value={searchTitle}
               id="searchTitle"
-              // onChange={handleTextChange}
+              onChange={handleTextChange}
             />
           </label>
           <section className="movie-index">

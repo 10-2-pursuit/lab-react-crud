@@ -34,11 +34,14 @@ function Show() {
 
   function handleDelete(id) {
     destroyShow(id).then((msg) => {
-                                    console.log("delete successfully");
-                                  }).catch((err) => {
-                                                      console.error(err);
-                                                      setLoadingError(true);
-                                                    });
+                                    console.log(`${id} is deleted successfully from the database`);
+                                    alert(`${id} is deleted successfully from the database`);
+                                    navi('/shows');
+                                  }
+                        ).catch((err) => {
+                                            console.error(err);
+                                            setLoadingError(true);
+                                          });
   }
 
   return (

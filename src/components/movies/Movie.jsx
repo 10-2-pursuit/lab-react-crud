@@ -11,6 +11,7 @@ function Movie() {
   const [loadingError, setLoadingError] = useState(false);
 
   const { id } = useParams();
+  const navi = useNavigate();
 
   useEffect(() => {
     getOneMovie(id)
@@ -18,17 +19,28 @@ function Movie() {
         setMovie(movieData);
         // because state in an obj we need to check Object.keys()
         if (Object.keys(movieData).length === 0) {
-          setLoadingError(true)
+          setLoadingError(true);
         } else {
-          setLoadingError(false)
+          setLoadingError(false);
         }
       })
       .catch((err) => {
-        console.error(err)
-        setLoadingError(true)
+        console.error(err);
+        setLoadingError(true);
       })
-  },[id])
-  function handleDelete() {}
+  },[id]);
+
+  function handleDelete(id) {
+    destroyMovie(id).then((msg) => {
+                                    console.log(`${id} is deleted successfully from the database`);
+                                    alert(`${id} is deleted successfully from the database`);
+                                    navi('/movies');
+                                  }
+                        ).catch((err) => {
+                                            console.error(err);
+                                            setLoadingError(true);
+                                          });
+  }
 
   return (
     <section className="movies-movie-wrapper">

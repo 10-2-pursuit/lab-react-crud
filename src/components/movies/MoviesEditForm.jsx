@@ -14,7 +14,19 @@ export default function MoviesForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  const params = useParams();
+  const { id } = params;
+  const nav = useNavigate();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    updateShow(id, movie).then(() => {
+                                      console.log("fetch success.");
+                                      alert(`${id} is updated successfully.`);
+                                      nav('/movies/:id');
+                                    }
+                              ).catch((err) => console.error(err));
+  }
 
   function handleTextChange(event) {
     setMovie({

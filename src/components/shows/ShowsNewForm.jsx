@@ -32,8 +32,10 @@ export default function ShowsForm() {
       releaseYear: event.target.releaseYear.value,
     };*/
     //console.log(show);
-    createShow(show);
-    nav('/shows');
+    createShow(show).then(() => {
+      console.log("create success");
+      nav('/shows');
+    }).catch((err)=>console.error(err));
   }
 
   function handleTextChange(event) {

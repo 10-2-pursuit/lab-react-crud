@@ -9,6 +9,7 @@ export default function ShowsIndex() {
   const [loadingError, setLoadingError] = useState(false)
   const [shows, setShows] = useState([]);
   const [title, setTitle] = useState("");
+
   useEffect(() => {
     // we need to get data 
     getAllShows()
@@ -45,7 +46,7 @@ export default function ShowsIndex() {
         console.error(err)
       })
     }
-  });
+  },[title]);
 
   function handleTextChange(){
     const inputField = document.getElementById('searchTitle').value;

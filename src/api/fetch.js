@@ -76,3 +76,13 @@ export function updateMovie(id, movie) {
                                   body: JSON.stringify(movie),
   });
 }
+
+export function destroyMovie(id) {
+  return fetch(`${URL}/movies/${id}`, { 
+                                  method: "DELETE", 
+                                  headers: {
+                                              'Accept': 'application/json', 
+                                              'Content-Type': 'application/json'
+                                            },
+  });
+}
