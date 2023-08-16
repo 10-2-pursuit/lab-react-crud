@@ -28,7 +28,7 @@ export default function ShowsIndex() {
   useEffect(()=> {
     if(title){
       getAllShows().then((showsJson) => {
-        setShows(showsJson.filter((show) => show.title.includes(title)));
+        setShows(showsJson.filter((show) => show.title.toLowerCase().includes(title)));
         setLoadingError(false);
       }).catch((err)=>{
         setLoadingError(true);

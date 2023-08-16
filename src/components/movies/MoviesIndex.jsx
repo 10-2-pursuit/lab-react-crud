@@ -26,7 +26,7 @@ export default function MoviesIndex() {
   useEffect(()=> {
     if(title){
       getAllMovies().then((moviesJson) => {
-        setMovies(moviesJson.filter((movie) => movie.title.includes(title)));
+        setMovies(moviesJson.filter((movie) => movie.title.toLowerCase().includes(title)));
         setLoadingError(false);
       }).catch((err)=>{
         setLoadingError(true);
