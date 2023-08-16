@@ -1,3 +1,11 @@
-export default function MoviesNewForm() {
-    return; 
+import React from 'react';
+
+const MoviesNewForm = () => {
+    return (
+        <div>
+            
+        </div>
+    );
 }
+
+export default MoviesNewForm;

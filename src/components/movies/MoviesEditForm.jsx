@@ -1,4 +1,13 @@
-export default function MoviesEditForm() {
-    return;
+import React from 'react';
+
+const MoviesEditForm = () => {
+    return (
+        <div>
+            
+        </div>
+    );
 }
+
+export default MoviesEditForm;
+
 
