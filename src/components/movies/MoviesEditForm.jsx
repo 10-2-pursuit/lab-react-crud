@@ -20,7 +20,7 @@ export default function MoviesForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    updateShow(id, movie).then(() => {
+    updateMovie(id, movie).then(() => {
                                       console.log("fetch success.");
                                       alert(`${id} is updated successfully.`);
                                       nav('/movies/:id');

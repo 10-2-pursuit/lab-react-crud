@@ -9,7 +9,7 @@ export default function MoviesIndex() {
   const [loadingError, setLoadingError] = useState(false)
   const [movies, setMovies] = useState([]);
   const [title, setTitle] = useState("");
-  
+
   useEffect(() => {
     // we need to get data 
     getAllMovies()
@@ -21,14 +21,12 @@ export default function MoviesIndex() {
         setLoadingError(true);
         console.error(err)
       })
-    // and save it to our shows  state
-
   },[])
 
   useEffect(()=> {
     if(title){
       getAllMovies().then((moviesJson) => {
-        setShows(moviesJson.filter((movie) => movie.title.includes(title)));
+        setMovies(moviesJson.filter((movie) => movie.title.includes(title)));
         setLoadingError(false);
       }).catch((err)=>{
         setLoadingError(true);
@@ -38,7 +36,7 @@ export default function MoviesIndex() {
     else{
       getAllMovies()
       .then((moviesJson) => {
-        setShows(moviesJson)
+        setMovies(moviesJson)
         setLoadingError(false)
       })
       .catch((err)=> {
