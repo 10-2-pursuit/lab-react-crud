@@ -14,12 +14,12 @@ export default function ShowsIndex() {
     // we need to get data 
     getAllShows()
       .then((showsJson) => {
-        setShows(showsJson)
-        setLoadingError(false)
+        setShows(showsJson);
+        setLoadingError(false);
       })
       .catch((err)=> {
         setLoadingError(true);
-        console.error(err)
+        console.error(err);
       })
     // and save it to our shows  state
 
@@ -38,12 +38,12 @@ export default function ShowsIndex() {
     else{
       getAllShows()
       .then((showsJson) => {
-        setShows(showsJson)
-        setLoadingError(false)
+        setShows(showsJson);
+        setLoadingError(false);
       })
       .catch((err)=> {
         setLoadingError(true);
-        console.error(err)
+        console.error(err);
       })
     }
   },[title]);
