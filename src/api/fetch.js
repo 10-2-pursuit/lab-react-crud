@@ -5,10 +5,8 @@ const URL = import.meta.env.VITE_BASE_API_URL;
 export function createShow(id, show) {
   const options ={ 
     method: "PUT", 
-    body: JSON.stringify{shows}
-    headers: {"Content-Type", "application/json"}
-    ;
-
+    body: JSON.stringify(shows),
+    headers: {"Content-Type": "application/json"}
   }
   return;
 
@@ -20,11 +18,11 @@ export function destroyShow(id) {
 }
 
 // Index/Get all
-export function getAllShows() {
+export function getAllShows(id) {
 
   return fetch(`${URL}/shows`)
-  .then ((response) => response.json)
-    
+  .then (res) => res.json())
+  .then 
   
 }
 
@@ -50,10 +48,10 @@ export function updateShow(id, show) {
 // Movies
 
 export function getallMovies() {
-  return fetch(`${URL}/movies`).then(res => res.json());
-}
+  fetch
 
 export function getMovies() {
-  return fetch(`${URL}/movies/${id}`).then(res => res.json());
+  return fetch(`${URL}/movies/${id}`)
+  .then(res => res.json());
 
 }

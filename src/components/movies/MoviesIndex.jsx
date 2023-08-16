@@ -1,31 +1,52 @@
 import React, { useEffect, useState } from "react";
-import ["./App.css"]
-
-
-
-//Components
-import Footer from "./components/common/Footer";
-import Home from "./components/home/Home";
-import Nav from "./components/common/Nav";
-import Show from "./components/shows/Show";
-import ShowsEditForm from "./components/shows/ShowsEditForm";
-import ShowsIndex from "./components/shows/ShowsIndex";
-import ShowsNewForm from "./components/shows/ShowsNewForm";
-
+import ErrorMessage from "../components/ErrorMessage";
+import { Link } from "react-router-dom";
 
 export default function MoviesIndex() {
   const [loadingError, setLoadingError] = useState(true);
 
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]); 
 
 
-  
   useEffect(() => {
-    fetch("URL/api/movies")
-      .then((res) => res.json())
-      .then((json) => setMovies(json));
-  }, []);
+    getAllMovies()
+    .then ((moviesJson) => {
+    setMovies(moviesJson)
+    setLoadingError(false)
+  })
+    .catch((err)=> {
+      setLoadingError(true)
+      console.log(err)
+    })
+}, []);
 
+return (
+  <div>
+      { loadingError ? (
+      <ErrorMessage />
+    ) : (
+      <section className="movies-index-wrapper">
+        <h2> All Movies </h2>
+        <button>
+          <Link to="/movies/new"> Add a Movie </Link>
+          
+      </button>
+      <br />
+      <label htmlFor="searchTitle" > Search Movies: 
+      <input 
+      type="text"
+      id="searchTitle"
+      />
 
-  return <p>Movie List</p>;
-}
+      </label>
+      <section className="movies-index">
+        {movies.map((movie) => {
+          return <MovieListing movie={movie} key={movie.id} />
+        })}
+    
+      </section>
+      </section>
+    )}
+  </div>
+  );
+      } 
