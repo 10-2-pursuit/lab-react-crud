@@ -26,7 +26,7 @@ function Show() {
     })
     .catch((err) => {
       console.error(err)
-      setLoadingEroor(true)
+      setLoadingError(true)
     })
   },[id])
 
