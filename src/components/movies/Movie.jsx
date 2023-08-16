@@ -1,15 +1,23 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import "./Movie.css";
 
 import ErrorMessage from "../errors/ErrorMessage";
+import { getOneMovie , destroyMovie } from "../../api/fetch";
+
+
+
+
+
 
 function Movie() {
     const [movie, setMovie] = useState({});
     const [loadingError, setLoadingError] = useState(false);
 
     const { id } = useParams();
+    const navigate = useNavigate();
+    
 
     function handleDelete() {}
 
