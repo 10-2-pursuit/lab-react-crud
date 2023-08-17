@@ -44,7 +44,7 @@ export default function ShowsIndex() {
           </label>
           <section className="movies-index">
           { movies.map((movie) => {
-              return <ShowListing movie = {movie} key = {movie.id}/>
+              return <MovieListing movie = {movie} key = {movie.id}/>
             })}
           </section>
         </section>
