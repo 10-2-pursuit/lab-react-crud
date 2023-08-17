@@ -1,40 +1,42 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 
-import "./Movie.css";
+import "./Show.css";
 
 import ErrorMessage from "../errors/ErrorMessage";
-import { getOneMovie } from "../../api/fetch";
+import { destroyShow, getOneShow } from "../../api/fetch";
 
-function Movie() {
-  const [movie, setMovie] = useState({});
+function Show() {
+  const [show, setShow] = useState({});
   const [loadingError, setLoadingError] = useState(false);
 
   const { id } = useParams();
   const navi = useNavigate();
 
   useEffect(() => {
-    getOneMovie(id)
-      .then((movieData) =>{
-        setMovie(movieData);
+    getOneShow(id)
+      .then((showData) =>{
+        setShow(showData);
         // because state in an obj we need to check Object.keys()
-        if (Object.keys(movieData).length === 0) {
-          setLoadingError(true);
+        if (Object.keys(showData).length === 0) {
+          setLoadingError(true)
         } else {
-          setLoadingError(false);
+          setLoadingError(false)
         }
       })
       .catch((err) => {
-        console.error(err);
-        setLoadingError(true);
+        console.error(err)
+        setLoadingError(true)
       })
   },[id]);
 
+  useEffect(null,[navi]);
+
   function handleDelete(id) {
-    destroyMovie(id).then((msg) => {
+    destroyShow(id).then((msg) => {
                                     console.log(`${id} is deleted successfully from the database`);
                                     alert(`${id} is deleted successfully from the database`);
-                                    navi('/movies');
+                                    navi('/shows');
                                   }
                         ).catch((err) => {
                                             console.error(err);
@@ -43,38 +45,38 @@ function Movie() {
   }
 
   return (
-    <section className="movies-movie-wrapper">
-      <h2>{movie.title}</h2>
-      <section className="movies-movie">
+    <section className="shows-show-wrapper">
+      <h2>{show.title}</h2>
+      <section className="shows-show">
         {loadingError ? (
           <ErrorMessage />
         ) : (
           <>
             <aside>
               <p>
-                <span>Duration:</span> {movie.duration}
+                <span>Duration:</span> {show.duration}
               </p>
               <p>
-                <span>Listed Categories:</span> {movie.listedIn}
+                <span>Listed Categories:</span> {show.listedIn}
               </p>
               <p>
-                <span>Country:</span> {movie.country}
+                <span>Country:</span> {show.country}
               </p>
               <p>
-                <span>Rating:</span> {movie.rating}
+                <span>Rating:</span> {show.rating}
               </p>
               <p>
-                <span>Date Added:</span> {movie.dateAdded}
+                <span>Date Added:</span> {show.dateAdded}
               </p>
             </aside>
             <article>
-              <p>{movie.description}</p>
+              <p>{show.description}</p>
             </article>
             <aside>
-              <button className="delete" onClick={() => handleDelete(movie.id)}>
-                Remove movie
+              <button className="delete" onClick={() => handleDelete(show.id)}>
+                Remove show
               </button>
-              <Link to={`/movies/${id}/edit`}>
+              <Link to={`/shows/${id}/edit`}>
                 <button>Edit</button>
               </Link>
             </aside>
@@ -85,4 +87,4 @@ function Movie() {
   );
 }
 
-export default Movie;
+export default Show;

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import "./MoviesForm.css";
+import { createShow } from "../../api/fetch";
+import "./ShowsForm.css";
 import { useNavigate } from "react-router-dom";
 
-export default function MoviesForm() {
-  const [movie, setMovie] = useState({
+export default function ShowsForm() {
+  const [show, setShow] = useState({
     type: "",
     title: "",
     country: "",
@@ -14,24 +15,32 @@ export default function MoviesForm() {
     rating: "",
     releaseYear: "",
   });
-
-  const params = useParams();
-  const { id } = params;
   const nav = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    updateMovie(id, movie).then(() => {
-                                      console.log("fetch success.");
-                                      alert(`${id} is updated successfully.`);
-                                      nav('/movies/:id');
-                                    }
-                              ).catch((err) => console.error(err));
+    /*
+    const tempShow = {
+      type: event.target.type.value,
+      title: event.target.title.value,
+      country: event.target.country.value,
+      dateAdded: event.target.dateAdded.value,
+      description: event.target.description.value,
+      duration: event.target.duration.value,
+      listedIn: event.target.listedIn.value,
+      rating: event.target.rating.value,
+      releaseYear: event.target.releaseYear.value,
+    };*/
+    //console.log(show);
+    createShow(show).then(() => {
+      console.log("create success");
+      nav('/shows');
+    }).catch((err)=>console.error(err));
   }
 
   function handleTextChange(event) {
-    setMovie({
-      ...movie,
+    setShow({
+      ...show,
       [event.target.id]: event.target.value,
     });
   }
@@ -42,7 +51,7 @@ export default function MoviesForm() {
       <input
         type="text"
         id="title"
-        value={movie.title}
+        value={show.title}
         onChange={handleTextChange}
       />
 
@@ -50,7 +59,7 @@ export default function MoviesForm() {
       <input
         type="text"
         id="description"
-        value={movie.description}
+        value={show.description}
         onChange={handleTextChange}
       />
 
@@ -58,7 +67,7 @@ export default function MoviesForm() {
       <input
         type="text"
         id="type"
-        value={movie.type}
+        value={show.type}
         onChange={handleTextChange}
       />
 
@@ -66,7 +75,7 @@ export default function MoviesForm() {
       <input
         type="text"
         id="rating"
-        value={movie.rating}
+        value={show.rating}
         onChange={handleTextChange}
       />
 
@@ -74,7 +83,7 @@ export default function MoviesForm() {
       <input
         type="text"
         id="listedIn"
-        value={movie.listedIn}
+        value={show.listedIn}
         onChange={handleTextChange}
       />
 
@@ -82,7 +91,7 @@ export default function MoviesForm() {
       <input
         type="text"
         id="duration"
-        value={movie.duration}
+        value={show.duration}
         onChange={handleTextChange}
       />
 
@@ -90,7 +99,7 @@ export default function MoviesForm() {
       <input
         type="text"
         id="releaseYear"
-        value={movie.releaseYear}
+        value={show.releaseYear}
         onChange={handleTextChange}
       />
 
@@ -98,7 +107,7 @@ export default function MoviesForm() {
       <input
         type="text"
         id="country"
-        value={movie.country}
+        value={show.country}
         onChange={handleTextChange}
       />
 
@@ -106,7 +115,7 @@ export default function MoviesForm() {
       <input
         type="text"
         id="dateAdded"
-        value={movie.dateAdded}
+        value={show.dateAdded}
         onChange={handleTextChange}
       />
 

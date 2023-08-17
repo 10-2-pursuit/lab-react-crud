@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import "./MoviesForm.css";
+import { useNavigate } from "react-router-dom";
 
 export default function MoviesForm() {
   const [movie, setMovie] = useState({
