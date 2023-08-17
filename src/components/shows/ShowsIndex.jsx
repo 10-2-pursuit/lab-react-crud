@@ -16,11 +16,13 @@ export default function ShowsIndex() {
       setShows(showsJson)
       setLoadingError(false)
     })
+  
     .catch((err) => {
       setLoadingError(true);
       console.error(err)
     })
   },[])
+
 
   return (
     <div>

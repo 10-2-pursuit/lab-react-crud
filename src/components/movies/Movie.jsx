@@ -18,8 +18,32 @@ function Movie() {
     const { id } = useParams();
     const navigate = useNavigate();
     
+    useEffect(() => {
+        getOneMovie(id)
+        .then((movieData) => {
+          setMovie(movieData)
+          if (Object.kets(movieData).length === 0) {
+            setLoadingError(true)
+          } else {
+            setLoadingError(false)
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+          setLoadingError(true)
+        })
+      },[id])
 
-    function handleDelete() {}
+      function handleDelete() {
+        destroyMovie(id)
+        .then(() => {
+          alert("movie destroyed- rerouting to index");
+          navigate("/movies")
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+      }
 
     return (
         <section className= "movies-moive-wrapper">
