@@ -16,13 +16,13 @@ const Movie = () => {
     getOneMovie(id)
       .then((movieData) => {
         setMovie(movieData);
-        Object.keys(showData).length ? setError(true) : setError(false);
+        Object.keys(movieData).length === 0 ? setError(true) : setError(false);
       })
       .catch((err) => {
         console.error(err);
         setError(true);
       });
-  }, []);
+  }, [id]);
 
   function handleDelete(id) {
     destroyMovie(id).then(() => {

@@ -26,11 +26,6 @@ export function updateShow(id, show) {
 }
 
 // Movies
-
-export function getAllMovies() {
-  return fetch(`${URL}/movies`).then(res => res.json());
-}
-
 export function createMovie(movie) {
   const options = {
     method: "POST",
@@ -46,9 +41,13 @@ export function destroyMovie(id) {
   return fetch(`${URL}/movies/${id}`, options);
 }
 
+export function getAllMovies() {
+  return fetch(`${URL}/movies`).then(res => res.json());
+}
+
 // Movie/Get one
 export function getOneMovie(id) {
-  return fetch(`${URL}/movies/${id}`, options).then(res => res.json());
+  return fetch(`${URL}/movies/${id}`).then(res => res.json());
 }
 
 // Update

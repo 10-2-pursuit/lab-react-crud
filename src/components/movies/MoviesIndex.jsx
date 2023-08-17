@@ -9,11 +9,14 @@ import "./MoviesIndex.css"
 const MoviesIndex = () => {
   const [error, setError] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [searchTitle, setSearchTitle] = useState('');
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
     getAllMovies()
     .then((moviesJson) => {
       setMovies(moviesJson)
+      setFilteredMovies(moviesJson);
       setError(false);
     })
     .catch((err) => {
@@ -22,6 +25,17 @@ const MoviesIndex = () => {
     })
   }, [])
 
+  function handleTextChange(event) {
+    setSearchTitle(event.target.value);
+    filterMovies(event.target.value);
+  }
+
+  function filterMovies(searchValue) {
+    const filtered = movies.filter((movie) => 
+      movie.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredMovies(filtered);
+  }
 
   return (
     <div>
@@ -38,13 +52,13 @@ const MoviesIndex = () => {
             Search Movies:
             <input
               type="text"
-              // value={searchTitle}
+              value={searchTitle}
               id="searchTitle"
-              // onChange={handleTextChange}
+              onChange={handleTextChange}
             />
           </label>
           <section className="movies-index">
-            {movies.map((movie)=> {
+            {filteredMovies.map((movie)=> {
               return <MovieListing movie={movie} key={movie.id}/>
             })}
           </section>
