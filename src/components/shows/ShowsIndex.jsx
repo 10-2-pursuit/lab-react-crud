@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { getAllShows } from "../../api/fetch";
 import ErrorMessage from "../errors/ErrorMessage";
 
 import "./ShowsIndex.css";
