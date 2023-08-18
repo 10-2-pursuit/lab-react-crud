@@ -65,11 +65,11 @@ export default function ShowsIndex() {
         <section className="shows-index-wrapper">
           <h2>All {type.replace(type[0], type[0].toUpperCase())}</h2>
           <button>
-            <Link to={`/${type}/new`}>Add a new show</Link>
+            <Link to={`/${type}/new`}>Add a new {type}</Link>
           </button>
           <br />
           <label htmlFor="searchTitle">
-            Search Shows:
+            Search {type.replace(type[0], type[0].toUpperCase())}:
             <input
               type="text"
               // value={searchTitle}

@@ -24,11 +24,11 @@ export default function ShowsForm() {
     console.log(type)
     console.log(id)
     updateShow(id, show, type).then(() => {
-                                      console.log("fetch success.");
-                                      alert(`${id} is updated successfully.`);
-                                      nav(`/${type}/${id}`);
-                                    }
-                              ).catch((err) => console.error(err));
+                                            console.log("fetch success.");
+                                            alert(`${id} is updated successfully.`);
+                                            nav(`/${type}/${id}`);
+                                          }
+                                    ).catch((err) => console.error(err));
   }
 
   function handleTextChange(event) {
