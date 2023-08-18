@@ -1,17 +1,46 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
 
 import "./Show.css";
 
 import ErrorMessage from "../errors/ErrorMessage";
+import { destroyShow, getOneShow } from "../../api/fetch";
 
 function Show() {
   const [show, setShow] = useState({});
   const [loadingError, setLoadingError] = useState(false);
 
-  const { id } = useParams();
+  const { id, type } = useParams();
+  const navi = useNavigate();
 
-  function handleDelete() {}
+  useEffect(() => {
+    getOneShow(id, type)
+      .then((showData) =>{
+        setShow(showData);
+        // because state in an obj we need to check Object.keys()
+        if (Object.keys(showData).length === 0) {
+          setLoadingError(true)
+        } else {
+          setLoadingError(false)
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+        setLoadingError(true)
+      })
+  },[id,type]);
+
+  function handleDelete(id) {
+    destroyShow(id,type).then((msg) => {
+                                    console.log(`${id} is deleted successfully from the database`);
+                                    alert(`${id} is deleted successfully from the database`);
+                                    navi(`/${type}`);
+                                  }
+                        ).catch((err) => {
+                                            console.error(err);
+                                            setLoadingError(true);
+                                          });
+  }
 
   return (
     <section className="shows-show-wrapper">
@@ -45,7 +74,7 @@ function Show() {
               <button className="delete" onClick={() => handleDelete(show.id)}>
                 Remove show
               </button>
-              <Link to={`/shows/${id}/edit`}>
+              <Link to={`/${type}/${id}/edit`}>
                 <button>Edit</button>
               </Link>
             </aside>

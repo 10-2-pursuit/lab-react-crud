@@ -1,11 +1,13 @@
 import {Link} from 'react-router-dom'
 import "./ShowListing.css";
-
-export default function ShowListing({ show }) {
+// this means showlisting is waiting for a show prop
+export default function ShowListing({ show, type }) {
   return (
     <article className="show">
       <h3 className="title">
-        <Link to={`/shows/${show.id}`}>{show.title}</Link>
+        {/* using the show prop here */}
+        {/* the <Link /> is for a USER to click on */}
+        <Link to={`/${type}/${show.id}`}>{show.title}</Link>
       </h3>
       <p className="description">{show.description}</p>
       <aside className="details">

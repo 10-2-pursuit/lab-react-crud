@@ -1,32 +1,99 @@
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
-
+import ShowListing from "../shows/ShowListing"
+import { getAllShows } from "../../api/fetch";
 import "./ShowsIndex.css";
 
 export default function ShowsIndex() {
+  const [loadingError, setLoadingError] = useState(false)
+  const [shows, setShows] = useState([]);
+  const [title, setTitle] = useState("");
+  
+  const param = useParams();
+  const {type, id} = param;
+  const nav = useNavigate();
+  
+  useEffect(() => {
+    // we need to get data 
+    getAllShows(type)
+      .then((showsJson) => {
+        setShows(showsJson);
+        setLoadingError(false);
+      })
+      .catch((err)=> {
+        setLoadingError(true);
+        console.error(err);
+      })
+    // and save it to our shows  state
+
+  },[])
+
+  useEffect(()=> {
+    if(title){
+      getAllShows(type).then((showsJson) => {
+        setShows(showsJson.filter((show) => show.title.toLowerCase().includes(title.toLowerCase())));
+        setLoadingError(false);
+      }).catch((err)=>{
+        setLoadingError(true);
+        console.error(err);
+      });
+    }
+    else{
+      getAllShows(type)
+      .then((showsJson) => {
+        setShows(showsJson);
+        setLoadingError(false);
+      })
+      .catch((err)=> {
+        setLoadingError(true);
+        console.error(err);
+      })
+    }
+  },[title,type]);
+
+  function handleTextChange(){
+    const inputField = document.getElementById('searchTitle').value;
+    setTitle(inputField);
+  }
+
+  function handleFilmTypeChange(){
+    const film = document.getElementById('film_type_filter').value;
+
+    nav(`/${film}`);
+    
+  }
+
   return (
     <div>
-      {false ? (
+      { loadingError ? (
         <ErrorMessage />
       ) : (
         <section className="shows-index-wrapper">
-          <h2>All Shows</h2>
+          <h2>All {type.replace(type[0], type[0].toUpperCase())}</h2>
           <button>
-            <Link to="/shows/new">Add a new show</Link>
+            <Link to={`/${type}/new`}>Add a new {type}</Link>
           </button>
           <br />
           <label htmlFor="searchTitle">
-            Search Shows:
+            Search {type.replace(type[0], type[0].toUpperCase())}:
             <input
               type="text"
               // value={searchTitle}
               id="searchTitle"
-              // onChange={handleTextChange}
+              onChange={handleTextChange}
             />
           </label>
+          <div className="filters">
+            <select id="film_type_filter" onChange={handleFilmTypeChange}>
+              <option value="shows">Shows</option>
+              <option value="movies">Movies</option>
+            </select>
+          </div>
           <section className="shows-index">
-            {/* <!-- ShowListing components --> */}
+            { shows.map((show) => {
+              return <ShowListing show = {show} type={type} key = {show.id}/>
+            })}
           </section>
         </section>
       )}

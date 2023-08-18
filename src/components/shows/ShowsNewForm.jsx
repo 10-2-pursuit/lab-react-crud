@@ -1,6 +1,7 @@
 import { useState } from "react";
-
+import { createShow } from "../../api/fetch";
 import "./ShowsForm.css";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ShowsForm() {
   const [show, setShow] = useState({
@@ -14,8 +15,30 @@ export default function ShowsForm() {
     rating: "",
     releaseYear: "",
   });
+  const nav = useNavigate();
+  const param = useParams();
+  const {type} = param;
 
-  function handleSubmit(event) {}
+  function handleSubmit(event) {
+    event.preventDefault();
+    /*
+    const tempShow = {
+      type: event.target.type.value,
+      title: event.target.title.value,
+      country: event.target.country.value,
+      dateAdded: event.target.dateAdded.value,
+      description: event.target.description.value,
+      duration: event.target.duration.value,
+      listedIn: event.target.listedIn.value,
+      rating: event.target.rating.value,
+      releaseYear: event.target.releaseYear.value,
+    };*/
+    //console.log(show);
+    createShow(show,type).then(() => {
+      console.log("create success");
+      nav(`/${type}`);
+    }).catch((err)=>console.error(err));
+  }
 
   function handleTextChange(event) {
     setShow({

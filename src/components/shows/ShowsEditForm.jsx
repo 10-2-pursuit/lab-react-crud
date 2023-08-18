@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./ShowsForm.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateShow } from "../../api/fetch";
 
 export default function ShowsForm() {
   const [show, setShow] = useState({
@@ -13,8 +15,21 @@ export default function ShowsForm() {
     rating: "",
     releaseYear: "",
   });
+  const params = useParams();
+  const { id, type } = params;
+  const nav = useNavigate();
 
-  function handleSubmit(event) {}
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(type)
+    console.log(id)
+    updateShow(id, show, type).then(() => {
+                                            console.log("fetch success.");
+                                            alert(`${id} is updated successfully.`);
+                                            nav(`/${type}/${id}`);
+                                          }
+                                    ).catch((err) => console.error(err));
+  }
 
   function handleTextChange(event) {
     setShow({
