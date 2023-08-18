@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
 import ShowListing from "../shows/ShowListing"
@@ -12,8 +12,8 @@ export default function ShowsIndex() {
   
   const param = useParams();
   const {type, id} = param;
-  const [filmFilmType, setType] = useState(type);
-
+  const nav = useNavigate();
+  
   useEffect(() => {
     // we need to get data 
     getAllShows(type)
@@ -57,6 +57,13 @@ export default function ShowsIndex() {
     setTitle(inputField);
   }
 
+  function handleFilmTypeChange(){
+    const film = document.getElementById('film_type_filter').value;
+
+    nav(`/${film}`);
+    
+  }
+
   return (
     <div>
       { loadingError ? (
@@ -77,6 +84,12 @@ export default function ShowsIndex() {
               onChange={handleTextChange}
             />
           </label>
+          <div className="filters">
+            <select id="film_type_filter" onChange={handleFilmTypeChange}>
+              <option value="shows">Shows</option>
+              <option value="movies">Movies</option>
+            </select>
+          </div>
           <section className="shows-index">
             { shows.map((show) => {
               return <ShowListing show = {show} type={type} key = {show.id}/>
