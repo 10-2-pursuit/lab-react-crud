@@ -10,11 +10,11 @@ function Show() {
   const [show, setShow] = useState({});
   const [loadingError, setLoadingError] = useState(false);
 
-  const { id } = useParams();
+  const { id, type } = useParams();
   const navi = useNavigate();
 
   useEffect(() => {
-    getOneShow(id)
+    getOneShow(id, type)
       .then((showData) =>{
         setShow(showData);
         // because state in an obj we need to check Object.keys()
@@ -28,15 +28,13 @@ function Show() {
         console.error(err)
         setLoadingError(true)
       })
-  },[id]);
-
-  useEffect(null,[navi]);
+  },[id,type]);
 
   function handleDelete(id) {
-    destroyShow(id).then((msg) => {
+    destroyShow(id,type).then((msg) => {
                                     console.log(`${id} is deleted successfully from the database`);
                                     alert(`${id} is deleted successfully from the database`);
-                                    navi('/shows');
+                                    navi(`/${type}`);
                                   }
                         ).catch((err) => {
                                             console.error(err);
@@ -76,7 +74,7 @@ function Show() {
               <button className="delete" onClick={() => handleDelete(show.id)}>
                 Remove show
               </button>
-              <Link to={`/shows/${id}/edit`}>
+              <Link to={`/${type}/${id}/edit`}>
                 <button>Edit</button>
               </Link>
             </aside>

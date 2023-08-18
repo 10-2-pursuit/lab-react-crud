@@ -2,8 +2,9 @@ const URL = import.meta.env.VITE_BASE_API_URL;
 // Shows
 
 // Create
-export function createShow(show) {
-  return fetch(`${URL}/shows/`, { 
+export function createShow(show, type) {
+  console.log(type);
+  return fetch(`${URL}/${type}/`, { 
                                         method: "POST", 
                                         headers: {
                                                     'Accept': 'application/json', 
@@ -14,8 +15,8 @@ export function createShow(show) {
 }
 
 // Delete
-export function destroyShow(id) {
-  return fetch(`${URL}/shows/${id}`, { 
+export function destroyShow(id,type) {
+  return fetch(`${URL}/${type}/${id}`, { 
                                   method: "DELETE", 
                                   headers: {
                                               'Accept': 'application/json', 
@@ -25,18 +26,18 @@ export function destroyShow(id) {
 }
 
 // Index/Get all
-export function getAllShows() {
-  return fetch(`${URL}/shows`).then(res => res.json());
+export function getAllShows(type) {
+  return fetch(`${URL}/${type}`).then(res => res.json());
 }
 
 // Show/Get one
-export function getOneShow(id) {
-  return fetch(`${URL}/shows/${id}`).then(res => res.json());
+export function getOneShow(id,type) {
+  return fetch(`${URL}/${type}/${id}`).then(res => res.json());
 }
 
 // Update
-export function updateShow(id, show) {
-  return fetch(`${URL}/shows/${id}`, { 
+export function updateShow(id, show, type) {
+  return fetch(`${URL}/${type}/${id}`, { 
                                   method: "PUT", 
                                   headers: {
                                               'Accept': 'application/json', 

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
 import ShowListing from "../shows/ShowListing"
@@ -9,10 +9,14 @@ export default function ShowsIndex() {
   const [loadingError, setLoadingError] = useState(false)
   const [shows, setShows] = useState([]);
   const [title, setTitle] = useState("");
+  
+  const param = useParams();
+  const {type, id} = param;
+  const [filmFilmType, setType] = useState(type);
 
   useEffect(() => {
     // we need to get data 
-    getAllShows()
+    getAllShows(type)
       .then((showsJson) => {
         setShows(showsJson);
         setLoadingError(false);
@@ -27,8 +31,8 @@ export default function ShowsIndex() {
 
   useEffect(()=> {
     if(title){
-      getAllShows().then((showsJson) => {
-        setShows(showsJson.filter((show) => show.title.toLowerCase().includes(title)));
+      getAllShows(type).then((showsJson) => {
+        setShows(showsJson.filter((show) => show.title.toLowerCase().includes(title.toLowerCase())));
         setLoadingError(false);
       }).catch((err)=>{
         setLoadingError(true);
@@ -36,7 +40,7 @@ export default function ShowsIndex() {
       });
     }
     else{
-      getAllShows()
+      getAllShows(type)
       .then((showsJson) => {
         setShows(showsJson);
         setLoadingError(false);
@@ -46,7 +50,7 @@ export default function ShowsIndex() {
         console.error(err);
       })
     }
-  },[title]);
+  },[title,type]);
 
   function handleTextChange(){
     const inputField = document.getElementById('searchTitle').value;
@@ -59,9 +63,9 @@ export default function ShowsIndex() {
         <ErrorMessage />
       ) : (
         <section className="shows-index-wrapper">
-          <h2>All Shows</h2>
+          <h2>All {type.replace(type[0], type[0].toUpperCase())}</h2>
           <button>
-            <Link to="/shows/new">Add a new show</Link>
+            <Link to={`/${type}/new`}>Add a new show</Link>
           </button>
           <br />
           <label htmlFor="searchTitle">
@@ -75,7 +79,7 @@ export default function ShowsIndex() {
           </label>
           <section className="shows-index">
             { shows.map((show) => {
-              return <ShowListing show = {show} key = {show.id}/>
+              return <ShowListing show = {show} type={type} key = {show.id}/>
             })}
           </section>
         </section>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createShow } from "../../api/fetch";
 import "./ShowsForm.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ShowsForm() {
   const [show, setShow] = useState({
@@ -16,6 +16,8 @@ export default function ShowsForm() {
     releaseYear: "",
   });
   const nav = useNavigate();
+  const param = useParams();
+  const {type} = param;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -32,9 +34,9 @@ export default function ShowsForm() {
       releaseYear: event.target.releaseYear.value,
     };*/
     //console.log(show);
-    createShow(show).then(() => {
+    createShow(show,type).then(() => {
       console.log("create success");
-      nav('/shows');
+      nav(`/${type}`);
     }).catch((err)=>console.error(err));
   }
 

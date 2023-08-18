@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 
 // Components
 import Footer from "./components/common/Footer";
@@ -10,12 +10,9 @@ import ShowsEditForm from "./components/shows/ShowsEditForm";
 import ShowsIndex from "./components/shows/ShowsIndex";
 import ShowsNewForm from "./components/shows/ShowsNewForm";
 
-import Movie from "./components/movies/Movie";
-import MoviesEditForm from "./components/movies/MoviesEditForm";
-import MoviesIndex from "./components/movies/MoviesIndex";
-import MoviesNewForm from "./components/movies/MoviesNewForm";
-
 function App() {
+  const params = useParams();
+  
   return (
     <div className="wrapper">
       <Router>
@@ -23,15 +20,10 @@ function App() {
         <Routes>
           {/* shows */}
           <Route path="/" element={<Home />} />
-          <Route path="/shows" element={<ShowsIndex />} />
-          <Route path="/shows/new" element={<ShowsNewForm />} />
-          <Route path="/shows/:id" element={<Show />} />
-          <Route path="/shows/:id/edit" element={<ShowsEditForm />} />
-          {/* movies */}
-          <Route path="/movies" element={<MoviesIndex />} />
-          <Route path="/movies/new" element={<MoviesNewForm />} />
-          <Route path="/movies/:id" element={<Movie />} />
-          <Route path="/movies/:id/edit" element={<MoviesEditForm />} />
+          <Route path="/:type" element={<ShowsIndex />} />
+          <Route path="/:type/new" element={<ShowsNewForm />} />
+          <Route path="/:type/:id" element={<Show />} />
+          <Route path="/:type/:id/edit" element={<ShowsEditForm />} />
         </Routes>
         <Footer />
       </Router>

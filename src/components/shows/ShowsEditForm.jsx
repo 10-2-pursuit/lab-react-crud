@@ -16,15 +16,17 @@ export default function ShowsForm() {
     releaseYear: "",
   });
   const params = useParams();
-  const { id } = params;
+  const { id, type } = params;
   const nav = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    updateShow(id, show).then(() => {
+    console.log(type)
+    console.log(id)
+    updateShow(id, show, type).then(() => {
                                       console.log("fetch success.");
                                       alert(`${id} is updated successfully.`);
-                                      nav('/shows/:id');
+                                      nav(`/${type}/${id}`);
                                     }
                               ).catch((err) => console.error(err));
   }
