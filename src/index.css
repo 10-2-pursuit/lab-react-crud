@@ -27,7 +27,7 @@ h6 {
   font-weight: 700;
 }
 
-.wrapper {
+.wrapper-shows .wrapper-movies {
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;

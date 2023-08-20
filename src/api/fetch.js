@@ -1,5 +1,5 @@
 // Shows
-const URL = 'http://localhost:5001/api/'
+const URL = 'http://localhost:5001/api'
 // Create
 export function createShow(show) {
   // we need to specify what type of request we're making in fetch
@@ -53,7 +53,7 @@ export function updateShow(id, show) {
 
 
   export function destroyMovie(id) {
-    return fetch(`http://localhost:5001/api/movies/${id}`, {
+    return fetch(`${URL}/movies/${id}`, {
       method: 'DELETE'
     });
   }
@@ -74,7 +74,7 @@ export function getOneMovie(id) {
 }
 
   export function updateMovie(id, movie) {
-    return fetch(`http://localhost:5001/api/movies/${id}`, {
+    return fetch(`${URL}/movies/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

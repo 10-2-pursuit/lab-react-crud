@@ -5,7 +5,7 @@
       "type": "TV Show",
       "title": "Scream Queens",
       "country": "United States",
-      "dateAdded": "",
+      "dateAdded": "08/15/2023",
       "releaseYear": 2015,
       "rating": "TV-14",
       "duration": "2 Seasons",
@@ -1194,11 +1194,11 @@
       "id": "YqYJsEh",
       "type": "Movie",
       "title": "Ricky Velez: Here's Everything",
-      "country": "",
+      "country": "USA",
       "dateAdded": "October 24, 2021",
       "releaseYear": 2021,
       "rating": "TV-MA",
-      "duration": "",
+      "duration": "1hr 43 sec",
       "listedIn": "Comedy, Stand Up",
       "description": "​Comedian Ricky Velez bares it all with his honest lens and down to earth perspective in his first-ever HBO stand-up special."
     },
@@ -1218,7 +1218,7 @@
       "id": "gKpdYyu",
       "type": "Movie",
       "title": "The Marksman",
-      "country": "",
+      "country": "USA",
       "dateAdded": "October 23, 2021",
       "releaseYear": 2021,
       "rating": "PG-13",
@@ -1789,6 +1789,42 @@
       "duration": "110 min",
       "listedIn": "Action, Adventure",
       "description": "On a mission in Jamaica, ultra-suave Agent 007 finds mad scientist Dr. No concocting a plot to derail the U.S. space program and take over the world."
+    },
+    {
+      "type": "Horror, Thriller",
+      "title": "The Pope's Exorcists",
+      "country": "USA",
+      "dateAdded": "08/15/2023",
+      "description": "Follow Gabriele Amorth, the Vatican's leading exorcist, as he investigates the possession of a child and uncovers a conspiracy the Vatican has tried to keep secret.",
+      "duration": "1hr 43 sec",
+      "listedIn": "movies of 2023",
+      "rating": "6.1/10",
+      "releaseYear": "2023",
+      "id": "BJy2ac0"
+    },
+    {
+      "type": "Horror, Thriller",
+      "title": "The Pope's Exorcists",
+      "country": "USA",
+      "dateAdded": "08/15/2023",
+      "description": "Follow Gabriele Amorth, the Vatican's leading exorcist, as he investigates the possession of a child and uncovers a conspiracy the Vatican has tried to keep secret.",
+      "duration": "1hr 43 sec",
+      "listedIn": "movies of 2023",
+      "rating": "6.1/10",
+      "releaseYear": "2023",
+      "id": "ogBXufs"
+    },
+    {
+      "type": "Horror, Thriller",
+      "title": "Evil Dead Rise",
+      "country": "Ireland, New Zealand, United States",
+      "dateAdded": "08/15/2023",
+      "description": "A twisted tale of two estranged sisters whose reunion is cut short by the rise of flesh-possessing demons, thrusting them into a primal battle for survival as they face the most nightmarish version of family imaginable.",
+      "duration": "1hr 36 min",
+      "listedIn": "Movies of 2023",
+      "rating": "6.6/10",
+      "releaseYear": "2023",
+      "id": "BLk9YBf"
     }
   ]
 }
