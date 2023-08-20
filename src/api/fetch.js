@@ -2,8 +2,8 @@ const URL = import.meta.env.VITE_BASE_API_URL;
 // Shows
 
 // Create
-export function createShow(show) {
-  return fetch(`${URL}/shows/`, { 
+export async function createShow(show) {
+  return await fetch(`${URL}/shows/`, { 
                                         method: "POST", 
                                         headers: {
                                                     'Accept': 'application/json', 
@@ -14,8 +14,8 @@ export function createShow(show) {
 }
 
 // Delete
-export function destroyShow(id) {
-  return fetch(`${URL}/shows/${id}`, { 
+export async function destroyShow(id) {
+  return await fetch(`${URL}/shows/${id}`, { 
                                   method: "DELETE", 
                                   headers: {
                                               'Accept': 'application/json', 
@@ -25,18 +25,18 @@ export function destroyShow(id) {
 }
 
 // Index/Get all
-export function getAllShows() {
-  return fetch(`${URL}/shows`).then(res => res.json());
+export async function getAllShows() {
+  return await fetch(`${URL}/shows`).then(res => res.json());
 }
 
 // Show/Get one
-export function getOneShow(id) {
-  return fetch(`${URL}/shows/${id}`).then(res => res.json());
+export async function getOneShow(id) {
+  return await fetch(`${URL}/shows/${id}`).then(res => res.json());
 }
 
 // Update
-export function updateShow(id, show) {
-  return fetch(`${URL}/shows/${id}`, { 
+export async function updateShow(id, show) {
+  return await fetch(`${URL}/shows/${id}`, { 
                                   method: "PUT", 
                                   headers: {
                                               'Accept': 'application/json', 
@@ -47,16 +47,16 @@ export function updateShow(id, show) {
 }
 
 // Movies
-export function getAllMovies() {
-  return fetch(`${URL}/movies`).then(res => res.json());
+export async function getAllMovies() {
+  return await fetch(`${URL}/movies`).then(res => res.json());
 }
 
-export function getOneMovie(id) {
-  return fetch(`${URL}/movies/${id}`).then(res => res.json());
+export async function getOneMovie(id) {
+  return await fetch(`${URL}/movies/${id}`).then(res => res.json());
 }
 
-export function createMovie(movie) {
-  return fetch(`${URL}/movies/`, { 
+export async function createMovie(movie) {
+  return await fetch(`${URL}/movies/`, { 
                                         method: "POST", 
                                         headers: {
                                                     'Accept': 'application/json', 
@@ -66,8 +66,8 @@ export function createMovie(movie) {
                                       });
 }
 
-export function updateMovie(id, movie) {
-  return fetch(`${URL}/movies/${id}`, { 
+export async function updateMovie(id, movie) {
+  return await fetch(`${URL}/movies/${id}`, { 
                                   method: "PUT", 
                                   headers: {
                                               'Accept': 'application/json', 
@@ -77,8 +77,8 @@ export function updateMovie(id, movie) {
   });
 }
 
-export function destroyMovie(id) {
-  return fetch(`${URL}/movies/${id}`, { 
+export async function destroyMovie(id) {
+  return await fetch(`${URL}/movies/${id}`, { 
                                   method: "DELETE", 
                                   headers: {
                                               'Accept': 'application/json', 
