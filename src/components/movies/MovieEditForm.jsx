@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {useParams, useNavigate} from "react-router-dom";
 import ErrorMessage from "../errors/ErrorMessage";
-import { getOneShow, updateShow } from "../../api/fetch";
+import { getOneMovie, updateMovie } from "../../api/fetch";
+//import "./MoviesForm.css";
 
-export default function ShowEditForm() {
+export default function MovieEditForm() {
   const [loadingError, setLoadingError] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  const [show, setShow] = useState({
+  const [movie, setMovie] = useState({
     type: "",
     title: "",
     country: "",
@@ -20,59 +21,62 @@ export default function ShowEditForm() {
   });
 
   useEffect(() => {
-    getOneShow(id)
-      .then((showData) => {
-        if (Object.keys(showData).length === 0) {
-          setLoadingError(true);
-        } else {
-          setLoadingError(false);
-          setShow(showData);
-        }
-      })
-      .catch((err) => {
+    getOneMovie(id).then((movie) => {
+      setMovie(movie);
+      if (Object.keys(movie).length === 0) {
         setLoadingError(true);
-      });
+      } else {
+        setLoadingError(false);
+      }
+    })
+    .catch((error) => {
+      setLoadingError(true);
+      console.log(error);
+    });
   }, [id]);
 
   const handleTextChange = (event) => {
     const { id, value } = event.target;
-    setShow((prevData) => ({
+    setMovie((prevData) => ({
       ...prevData,
       [id]: value,
     }));
   };
-
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    updateShow(id, show)
+    
+    updateMovie(id, movie)
       .then(() => {
-        alert("Show updated");
-        navigate("/shows");
+        alert('Movie updated - redirecting to index');
+        navigate('/movies');
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
-  }
+      navigate.push('/movies');
+  };
+  
 
   return (
-    <div className="show-edit-form">
-      <h1>Edit Show</h1>
-      {loadingError ? (
-        <ErrorMessage />
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={show.title}
-            onChange={handleTextChange}
-          />
-<label htmlFor="description">Description:</label>
+    <div className="movie-edit-form">
+    <h1>Edit Movie</h1>
+    {loadingError ? (
+      <ErrorMessage />
+    ) : (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="title">Title:</label>
+      <input
+        type="text"
+        id="title"
+        value={movie.title}
+        onChange={handleTextChange}
+      />
+
+      <label htmlFor="description">Description:</label>
       <input
         type="text"
         id="description"
-        value={show.description}
+        value={movie.description}
         onChange={handleTextChange}
       />
 
@@ -80,7 +84,7 @@ export default function ShowEditForm() {
       <input
         type="text"
         id="type"
-        value={show.type}
+        value={movie.type}
         onChange={handleTextChange}
       />
 
@@ -88,7 +92,7 @@ export default function ShowEditForm() {
       <input
         type="text"
         id="rating"
-        value={show.rating}
+        value={movie.rating}
         onChange={handleTextChange}
       />
 
@@ -96,7 +100,7 @@ export default function ShowEditForm() {
       <input
         type="text"
         id="listedIn"
-        value={show.listedIn}
+        value={movie.listedIn}
         onChange={handleTextChange}
       />
 
@@ -104,7 +108,7 @@ export default function ShowEditForm() {
       <input
         type="text"
         id="duration"
-        value={show.duration}
+        value={movie.duration}
         onChange={handleTextChange}
       />
 
@@ -112,7 +116,7 @@ export default function ShowEditForm() {
       <input
         type="text"
         id="releaseYear"
-        value={show.releaseYear}
+        value={movie.releaseYear}
         onChange={handleTextChange}
       />
 
@@ -120,7 +124,7 @@ export default function ShowEditForm() {
       <input
         type="text"
         id="country"
-        value={show.country}
+        value={movie.country}
         onChange={handleTextChange}
       />
 
@@ -128,15 +132,15 @@ export default function ShowEditForm() {
       <input
         type="text"
         id="dateAdded"
-        value={show.dateAdded}
+        value={movie.dateAdded}
         onChange={handleTextChange}
       />
 
-          <br />
+      <br />
 
-          <input type="submit" value="Update Show" />
-        </form>
-      )}
-    </div>
+      <input type="submit" value="Update Movie"/>
+    </form>
+  )};
+  </div>
   );
 }
