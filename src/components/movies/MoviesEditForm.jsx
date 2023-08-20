@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./MoviesForm.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateMovie } from "../../api/fetch";
 
 export default function MoviesForm() {
   const [movie, setMovie] = useState({
@@ -24,7 +25,7 @@ export default function MoviesForm() {
     updateMovie(id, movie).then(() => {
                                       console.log("fetch success.");
                                       alert(`${id} is updated successfully.`);
-                                      nav('/movies/:id');
+                                      nav(`/movies/${id}`);
                                     }
                               ).catch((err) => console.error(err));
   }

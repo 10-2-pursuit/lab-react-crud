@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-
+import { destroyMovie } from "../../api/fetch";
 import "./Movie.css";
 
 import ErrorMessage from "../errors/ErrorMessage";

@@ -30,7 +30,7 @@ function Show() {
       })
   },[id]);
 
-  useEffect(null,[navi]);
+  useEffect(()=>{},[navi]);
 
   function handleDelete(id) {
     destroyShow(id).then((msg) => {

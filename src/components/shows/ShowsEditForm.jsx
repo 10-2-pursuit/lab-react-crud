@@ -24,7 +24,7 @@ export default function ShowsForm() {
     updateShow(id, show).then(() => {
                                       console.log("fetch success.");
                                       alert(`${id} is updated successfully.`);
-                                      nav('/shows/:id');
+                                      nav(`/shows/${id}`);
                                     }
                               ).catch((err) => console.error(err));
   }
