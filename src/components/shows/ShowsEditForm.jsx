@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./ShowsForm.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { updateShow } from "../../api/fetch";
+import { updateShow, getOneShow } from "../../api/fetch";
 
 export default function ShowsForm() {
   const [show, setShow] = useState({
@@ -18,6 +18,23 @@ export default function ShowsForm() {
   const params = useParams();
   const { id } = params;
   const nav = useNavigate();
+
+  useEffect(() => {
+    getOneShow(id)
+      .then((showData) =>{
+        setShow(showData);
+        // because state in an obj we need to check Object.keys()
+        if (Object.keys(showData).length === 0) {
+          setLoadingError(true)
+        } else {
+          setLoadingError(false)
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+        setLoadingError(true)
+      })
+  },[id]);
 
   function handleSubmit(event) {
     event.preventDefault();

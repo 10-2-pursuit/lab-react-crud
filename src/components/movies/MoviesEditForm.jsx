@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./MoviesForm.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { updateMovie } from "../../api/fetch";
+import { updateMovie, getOneMovie } from "../../api/fetch";
 
-export default function MoviesForm() {
+export default function MoviesForm({}) {
   const [movie, setMovie] = useState({
     type: "",
     title: "",
@@ -19,6 +19,23 @@ export default function MoviesForm() {
   const params = useParams();
   const { id } = params;
   const nav = useNavigate();
+
+  useEffect(() => {
+    getOneMovie(id)
+      .then((movieData) =>{
+        setMovie(movieData);
+        // because state in an obj we need to check Object.keys()
+        if (Object.keys(movieData).length === 0) {
+          setLoadingError(true);
+        } else {
+          setLoadingError(false);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoadingError(true);
+      })
+  },[id]);
 
   function handleSubmit(event) {
     event.preventDefault();
