@@ -1,6 +1,7 @@
 import { useState } from "react";
-
+import { createShow } from "../../api/fetch"
 import "./ShowsForm.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ShowsForm() {
   const [show, setShow] = useState({
@@ -15,11 +16,31 @@ export default function ShowsForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  const navigate = useNavigate();
+
+
+  function handleSubmit(event) {
+    <event.preventDefault();  //prevents the page from refreshing
+    createShow(show) 
+    .then ((createShow) => createShow.show)
+    console.log( createdShow )
+    alert (`Show created: ${createShow.title}, id: ${createShow.id}`)
+    navigate('/show')
+    .then((data) => {
+      console.log(data);
+    }
+
+
+  }
+// this handles the change in some input
 
   function handleTextChange(event) {
+    //event is passed from React change detection 
     setShow({
       ...show,
+      // passing id from the event as tge key is the object
+      // passing the value from the event as the value of the object
+      // "title" whatever value is in the input
       [event.target.id]: event.target.value,
     });
   }
