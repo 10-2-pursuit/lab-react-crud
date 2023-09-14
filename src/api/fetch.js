@@ -1,5 +1,5 @@
 // Shows
-const URL = 'http://localhost:5001/api'
+const URL = 'http://localhost:8000'
 // Create
 export function createShow(show) {
   // we need to specify what type of request we're making in fetch
