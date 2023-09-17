@@ -1,13 +1,30 @@
 import { Link } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
-
+import ShowListing from "../shows/ShowListing";
+import { getAllShows } from "../../api/fetch";
 import "./ShowsIndex.css";
 
 export default function ShowsIndex() {
+  const [loadingError, setLoadingError] = useState(false);
+  const [shows, setShows] = useState([]);
+  const [filteredShows, setFilteredShows] = useState([]);
+
+  useEffect(() => {
+    getAllShows()
+      .then((showsJson) => {
+        setShows(showsJson);
+        setLoadingError(false);
+      })
+      .catch((err) => {
+        setLoadingError(true);
+        console.error(err);
+      });
+  }, []);
+
   return (
     <div>
-      {false ? (
+      {loadingError ? (
         <ErrorMessage />
       ) : (
         <section className="shows-index-wrapper">
@@ -15,18 +32,8 @@ export default function ShowsIndex() {
           <button>
             <Link to="/shows/new">Add a new show</Link>
           </button>
-          <br />
-          <label htmlFor="searchTitle">
-            Search Shows:
-            <input
-              type="text"
-              // value={searchTitle}
-              id="searchTitle"
-              // onChange={handleTextChange}
-            />
-          </label>
           <section className="shows-index">
-            {/* <!-- ShowListing components --> */}
+            <ShowListing shows={filteredShows.length > 0 ? filteredShows : shows} />
           </section>
         </section>
       )}

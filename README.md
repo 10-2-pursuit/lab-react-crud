@@ -22,7 +22,7 @@ You've been hired to build out _ScreenViews_, a website dedicated to rating show
 
 1. Deploy this application to Netlify and add the link to your netlify site below:
 
-- [MY LIVE SITE URL]()
+- [https://harmonious-arithmetic-2769c4.netlify.app/](https://harmonious-arithmetic-2769c4.netlify.app/)
 
 ### API for this lab
 
