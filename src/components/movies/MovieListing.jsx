@@ -1,9 +1,10 @@
-import {Link} from 'react-router-dom'
-import "./MovieListing.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import "./MovieListing.css"
 
-export default function MovieListing({ movie }) {
-  return (
-    <article className="movie">
+const MovieListing = ({movie}) => {
+    return (
+        <article className="movie">
       <h3 className="title">
         <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
       </h3>
@@ -18,5 +19,7 @@ export default function MovieListing({ movie }) {
         </p>
       </aside>
     </article>
-  );
+    );
 }
+
+export default MovieListing;

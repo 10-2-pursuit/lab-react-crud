@@ -1,32 +1,45 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
-import MovieListing from "../movies/MovieListing"
-import { getAllMovies } from "../../api/fetch";
-import "./MoviesIndex.css";
+import MovieListing from './MovieListing';
+import { getAllMovies } from '../../api/fetch';
+import "./MoviesIndex.css"
 
-export default function ShowsIndex() {
-
-  const [loading, setLoadingError] = useState(false)
-  const [movies, setMovies] = useState ([]);
+const MoviesIndex = () => {
+  const [error, setError] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [searchTitle, setSearchTitle] = useState('');
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
     getAllMovies()
-    .then((showsJson) => {
-      setMovies(showsJson)
-      setLoadingError(false)
+    .then((moviesJson) => {
+      setMovies(moviesJson)
+      setFilteredMovies(moviesJson);
+      setError(false);
     })
-  
     .catch((err) => {
-      setLoadingError(true);
+      setError(true);
       console.error(err)
     })
-  },[])
+  }, [])
 
+  function handleTextChange(event) {
+    setSearchTitle(event.target.value);
+    filterMovies(event.target.value);
+  }
+
+  function filterMovies(searchValue) {
+    const filtered = movies.filter((movie) => 
+      movie.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredMovies(filtered);
+  }
 
   return (
     <div>
-      {false ? (
+      {error ? (
         <ErrorMessage />
       ) : (
         <section className="movies-index-wrapper">
@@ -39,12 +52,14 @@ export default function ShowsIndex() {
             Search Movies:
             <input
               type="text"
+              value={searchTitle}
               id="searchTitle"
+              onChange={handleTextChange}
             />
           </label>
           <section className="movies-index">
-          { movies.map((movie) => {
-              return <MovieListing movie = {movie} key = {movie.id}/>
+            {filteredMovies.map((movie)=> {
+              return <MovieListing movie={movie} key={movie.id}/>
             })}
           </section>
         </section>
@@ -52,3 +67,5 @@ export default function ShowsIndex() {
     </div>
   );
 }
+
+export default MoviesIndex;

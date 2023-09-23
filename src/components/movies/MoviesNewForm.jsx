@@ -1,9 +1,10 @@
-import { useState  } from "react";
+import React from "react";
+import { useState } from "react";
 import { createMovie } from "../../api/fetch";
 import { useNavigate } from "react-router-dom";
 import "./MoviesForm.css";
 
-export default function MoviesForm() {
+const MoviesForm = () => {
   const [movie, setMovie] = useState({
     type: "",
     title: "",
@@ -18,20 +19,19 @@ export default function MoviesForm() {
 
   const navigate = useNavigate();
 
-  function handleSubmit(event) { 
+  function handleSubmit(event) {
     event.preventDefault();
-   
+
     createMovie(movie)
       .then((createdMovie) => {
-        console.log(createdMovie)
-        alert(`movie created: ${createdMovie.title} id : ${createdMovie.id}`)
-       
-        navigate(`/movies/${createdMovie.id}`)
+        console.log(createdMovie);
+        alert(`movie created: ${createdMovie.title} id : ${createdMovie.id}`);
+        navigate(`/movies/${createdMovie.id}`);
       })
       .catch((err) => {
-        console.error(err)
-      })
-}
+        console.error(err);
+      });
+  }
 
   function handleTextChange(event) {
     setMovie({
@@ -119,4 +119,6 @@ export default function MoviesForm() {
       <input type="submit" />
     </form>
   );
-}
+};
+
+export default MoviesForm;

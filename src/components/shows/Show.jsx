@@ -18,7 +18,7 @@ function Show() {
     getOneShow(id)
     .then((showData) => {
       setShow(showData)
-      if (Object.kets(showData).length === 0) {
+      if (Object.keys(showData).length === 0) {
         setLoadingError(true)
       } else {
         setLoadingError(false)
